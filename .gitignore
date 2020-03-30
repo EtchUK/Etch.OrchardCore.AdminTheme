@@ -35,7 +35,6 @@ msbuild.wrn
 
 # Build artifacts
 
-wwwroot/
 dist/
 
 # Dependencies

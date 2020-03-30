@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="OrchardCore.ContentManagement.Abstractions" Version="1.0.0-rc1-10004" />
     <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0-rc1-10004" />
+    <PackageReference Include="OrchardCore.Flows" Version="1.0.0-rc1-10004" />
     <PackageReference Include="OrchardCore.Media" Version="1.0.0-rc1-10004" />
     <PackageReference Include="OrchardCore.Menu" Version="1.0.0-rc1-10004" />
     <PackageReference Include="OrchardCore.ResourceManagement" Version="1.0.0-rc1-10004" />

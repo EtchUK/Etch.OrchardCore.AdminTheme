@@ -16,6 +16,12 @@ This module is available on [NuGet](https://www.nuget.org/packages/Etch.OrchardC
 
 Alternatively you can [download the source](https://github.com/etchuk/Etch.OrchardCore.AdminTheme/archive/master.zip) or clone the repository to your local machine. Add the project to your solution that contains an Orchard Core project and add a reference to Etch.OrchardCore.AdminTheme.
 
+## Fixes
+
+Below is a list of fixes that have been applied. These should be checked each time there is a new version of Orchard Core as they will likely be resolved and can be reverted.
+
+- Fix flow editor not collapsing/expanding when editing `BagPart` (https://github.com/OrchardCMS/OrchardCore/pull/4389)
+
 ## Development
 
 ### Prerequisities

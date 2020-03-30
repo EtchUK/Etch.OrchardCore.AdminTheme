@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <Version>0.1.0-rc1</Version>
+    <PackageId>Etch.OrchardCore.AdminTheme</PackageId>
+    <Title>Admin Theme</Title>
+    <Authors>Etch UK</Authors>
+    <Description>Alterations to the TheAdmin theme.</Description>
+    <PackageTags>orchardcore</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove=".gitignore" />
+    <EmbeddedResource Remove="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0-rc1-10004" />
+    <PackageReference Include="OrchardCore.Media" Version="1.0.0-rc1-10004" />
+    <PackageReference Include="OrchardCore.Menu" Version="1.0.0-rc1-10004" />
+    <PackageReference Include="OrchardCore.ResourceManagement" Version="1.0.0-rc1-10004" />
+    <PackageReference Include="OrchardCore.Theme.Targets" Version="1.0.0-rc1-10004" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>

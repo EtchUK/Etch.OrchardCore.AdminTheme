@@ -1,0 +1,141 @@
+﻿@using OrchardCore.ContentManagement.Metadata.Settings;
+@using OrchardCore.Flows.ViewModels;
+
+@model FlowPartEditViewModel
+
+@inject IContentManager ContentManager
+@inject OrchardCore.ContentManagement.Metadata.IContentDefinitionManager ContentDefinitionManager
+@inject OrchardCore.ContentManagement.Display.IContentItemDisplayManager ContentItemDisplayManager
+
+@{
+    var widgetContentTypes = ContentDefinitionManager.ListTypeDefinitions().Where(t => t.GetSettings<ContentTypeSettings>().Stereotype == "Widget").OrderBy(x => x.DisplayName);
+    var widgetTemplatePlaceholderId = Html.Id("widgetTemplatePlaceholder");
+
+    var categories = widgetContentTypes.Select(x => x.Settings["Category"]?.ToString()).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().OrderBy(x => x);
+}
+
+<script asp-name="jQuery-ui" at="Foot"></script>
+
+<fieldset class="form-group">
+    <div id="@widgetTemplatePlaceholderId" class="widget-template-placeholder">
+        @{ var htmlFieldPrefix = this.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix; }
+        @foreach (var widget in Model.FlowPart.Widgets)
+        {
+            var prefix = Guid.NewGuid().ToString("n");
+            <div class="widget-template">
+                @{
+                    dynamic widgetEditor = await ContentItemDisplayManager.BuildEditorAsync(widget, Model.Updater, false, "", prefix);
+
+                    widgetEditor.PrefixesName = Html.NameFor(x => x.Prefixes);
+                    widgetEditor.ContentTypesName = Html.NameFor(x => x.ContentTypes);
+                    widgetEditor.TargetId = widgetTemplatePlaceholderId;
+
+                    widgetEditor.Metadata.Alternates.Add("Widget_Edit__Flow");
+                }
+
+                @await DisplayAsync(widgetEditor)
+
+                @{ this.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = htmlFieldPrefix; }
+                <input type="hidden" asp-for="Prefixes" value="@prefix" />
+                <input type="hidden" asp-for="ContentTypes" value="@widget.ContentType" />
+            </div>
+        }
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#widget-picker" data-picker-title="@T["Available Widgets"]">
+            @T["Add Widget"]
+        </button>
+    </div>
+
+
+    @if (Context.Items["FlowPart.Edit"] == null)
+    {
+        Context.Items["FlowPart.Edit"] = new object();
+        <input type="hidden" id="buildEditorUrl" value="@Url.Action("BuildEditor", "Admin", new { area = "OrchardCore.Flows" })" />
+
+        @foreach (var type in widgetContentTypes)
+        {
+            // Render a mock widget so that its resources are included in the page
+            var contentItem = await ContentManager.NewAsync(type.Name);
+            await DisplayAsync(await ContentItemDisplayManager.BuildEditorAsync(contentItem, Model.Updater, true, "", Guid.NewGuid().ToString("n")));
+        }
+
+        <script asp-src="~/OrchardCore.Flows/Scripts/flows.edit.js" at="Foot" depends-on="admin"></script>
+        <style asp-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.css"></style>
+        <style asp-src="~/OrchardCore.Flows/Styles/flows.edit.css"></style>
+        <style asp-src="~/Etch.OrchardCore.AdminTheme/Styles/flows.edit.css"></style>
+        <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/widget-picker.js" at="Foot" depends-on="admin"></script>
+
+        <!-- Widget Picker Modal -->
+        <div class="modal fade modal-widgets" id="widget-picker" tabindex="-1" role="dialog" aria-labelledby="widget-picker-label" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="activity-picker-label">@T["Available Widgets"]</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-2">
+                                <div class="form-group">
+                                    <input class="form-control" type="search" placeholder="@T["Filter"]" aria-label="@T["Filter"]" autofocus>
+                                </div>
+                                <ul class="nav nav-pills flex-column widget-picker-categories">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#all" data-toggle="pill">All</a>
+                                    </li>
+
+                                    @foreach (var category in categories)
+                                    {
+                                        <li class="nav-item" data-category="@category.HtmlClassify()">
+                                            <a class="nav-link" href="#@category.HtmlClassify()" data-toggle="pill">@category</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-sm-9 col-md-9 col-lg-10">
+                                <div class="card-columns tab-content">
+                                    @foreach (var type in widgetContentTypes)
+                                    {
+                                        <div class="card widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><i class="fa fa-@type.Settings["Icon"]?.ToString()"></i> @type.DisplayName</h4>
+                                                <p>@type.Settings["Description"]</p>
+                                            </div>
+                                            <div class="card-footer text-muted text-xs-right">
+                                                <a class="btn btn-primary btn-sm add-widget"
+                                                   data-target-id="@widgetTemplatePlaceholderId"
+                                                   data-prefixes-name="@Html.NameFor(x => x.Prefixes)"
+                                                   data-contenttypes-name="@Html.NameFor(x => x.ContentTypes)"
+                                                   data-widget-type="@type.Name"
+                                                   data-flowmetadata="true"
+                                                   data-dismiss="modal"
+                                                   href="javascript:;">Add</a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@T["Cancel"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script at="Foot">
+        $("#@widgetTemplatePlaceholderId").sortable({
+            handle: ".widget-editor-header",
+            cursor: "move",
+            stop: function (event, ui) {
+                $(document).trigger('contentpreview:render');
+            }
+        });
+    </script>
+</fieldset>

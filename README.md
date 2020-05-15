@@ -22,6 +22,48 @@ Below is a list of fixes that have been applied. These should be checked each ti
 
 - Fix flow editor not collapsing/expanding when editing `BagPart` (https://github.com/OrchardCMS/OrchardCore/pull/4389)
 
+## Enhancements
+
+### Flow Editor
+
+Out the box the flow editor is difficult to use when there are a large number of widgets. To fix this the theme will override the `FlowPart` edit template to use a modal with categories/search (replicating workflows) as pitched in an [issue created in the Orchard Core repository](https://github.com/OrchardCMS/OrchardCore/issues/3558).
+
+To make this work effectively the content definitions for widgets on the sites must include a `Category`, `Description` & `Icon` (using icon name from [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free)). This can be done by running a recipe to update the content definitions, below is a small example to give an idea.
+
+```
+{
+    "name": "Definitions",
+    "displayName": "Definitions",
+    "description": "",
+    "version": "0.0.1",
+    "issetuprecipe": false,
+    "steps": [
+        {
+            "name": "ContentDefinition",
+            "ContentTypes": [
+                {
+                    "Name": "Paragraph",
+                    "DisplayName": "Paragraph",
+                    "Settings": {
+                        "Category": "Content",
+                        "Description": "Display a paragraph of text.",
+                        "Icon": "paragraph",
+                        "Stereotype": "Widget"
+                    },
+                    "ContentTypePartDefinitionRecords": [
+                        {
+                            "PartName": "ParagraphPart",
+                            "Name": "ParagraphPart",
+                            "Settings": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
 ## Development
 
 ### Prerequisities

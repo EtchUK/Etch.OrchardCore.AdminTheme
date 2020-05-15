@@ -1,0 +1,9 @@
+﻿@media (min-width: 992px) {
+    .modal-widgets .modal-lg {
+        max-width: 1200px;
+    }
+}
+
+.card.widget p {
+    margin-bottom: 0;
+}

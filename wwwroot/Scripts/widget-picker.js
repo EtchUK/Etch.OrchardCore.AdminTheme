@@ -2,7 +2,7 @@
     var $categoryPickers = document.querySelectorAll('.widget-picker-categories .nav-item');
 
     var applyFilter = function (category, term) {
-        var $widgets = document.querySelectorAll('.widget');
+        var $widgets = document.querySelectorAll('.js-flow-widget');
 
         category = category || document.querySelectorAll('.widget-picker-categories .nav-link.active')[0].getAttribute('href').substr(1);
         term = term || document.querySelector('.modal-widgets input[type=search]').value;

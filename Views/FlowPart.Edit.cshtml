@@ -65,7 +65,7 @@
         <style asp-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.css"></style>
         <style asp-src="~/OrchardCore.Flows/Styles/flows.edit.css"></style>
         <style asp-src="~/Etch.OrchardCore.AdminTheme/Styles/flows.edit.css"></style>
-        <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/widget-picker.js" at="Foot" depends-on="admin"></script>
+        <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/widget-picker.js?v=0.2.1" at="Foot" depends-on="admin"></script>
 
         <!-- Widget Picker Modal -->
         <div class="modal fade modal-widgets" id="widget-picker" tabindex="-1" role="dialog" aria-labelledby="widget-picker-label" aria-hidden="true">
@@ -100,7 +100,7 @@
                                 <div class="card-columns tab-content">
                                     @foreach (var type in widgetContentTypes)
                                     {
-                                        <div class="card widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
+                                        <div class="card widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
                                             <div class="card-body">
                                                 <h4 class="card-title"><i class="fa fa-@type.Settings["Icon"]?.ToString()"></i> @type.DisplayName</h4>
                                                 <p>@type.Settings["Description"]</p>

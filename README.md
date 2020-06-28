@@ -18,9 +18,13 @@ Alternatively you can [download the source](https://github.com/etchuk/Etch.Orcha
 
 ## Fixes
 
-Currently theme contains no fixes.
+- Remove reduction of spacing on widgets within a flow 
 
 ## Enhancements
+
+### Content Editor
+
+Minor tweak to add view option when editing a published content item.
 
 ### Flow Editor
 

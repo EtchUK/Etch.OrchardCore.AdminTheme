@@ -70,6 +70,10 @@ To make this work effectively the content definitions for widgets on the sites m
 
 One side affect of this change is that the insert widget feature to be able to add a new widget between existing widgets has been disabled.
 
+### List Part Edit Option
+
+Add edit option on admin area page displaying list of items comtained by a content item.
+
 ## Development
 
 ### Prerequisities

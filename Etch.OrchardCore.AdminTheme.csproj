@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="OrchardCore.ContentManagement.Abstractions" Version="1.0.0-rc2-13450" />
+    <PackageReference Include="OrchardCore.Contents.TagHelpers" Version="1.0.0-rc2-13450" />
     <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0-rc2-13450" />
     <PackageReference Include="OrchardCore.Flows" Version="1.0.0-rc2-13450" />
     <PackageReference Include="OrchardCore.Media" Version="1.0.0-rc2-13450" />

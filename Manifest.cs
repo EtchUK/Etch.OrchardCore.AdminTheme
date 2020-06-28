@@ -4,7 +4,7 @@ using OrchardCore.DisplayManagement.Manifest;
     Name = "Admin Theme",
     Author = "EtchUK Ltd.",
     Website = "https://etchuk.com/",
-    Version = "0.2.2",
+    Version = "0.3.0",
     Description = "Extension of TheAdmin theme.",
     Tags = new[] { "admin" },
     BaseTheme = "TheAdmin"

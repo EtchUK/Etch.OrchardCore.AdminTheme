@@ -7,3 +7,23 @@
 .card.widget p {
     margin-bottom: 0;
 }
+
+.card.widget .card-body,
+.card.widget .card-footer {
+    display: block;
+}
+
+.card.widget .card-body,
+.card.widget .card-footer {
+    display: block;
+}
+
+.card.collapsed .card-body, 
+.card.collapsed .card-footer {
+    display: none;
+}
+
+.widget-editor-body > div > .edit-container div.form-group,
+.widget-editor-body>div>.edit-container div.form-group {
+    margin-bottom: 1rem!important;
+}

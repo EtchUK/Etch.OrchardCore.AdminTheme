@@ -8,7 +8,7 @@ Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore)
 
 ## Orchard Core Reference
 
-This module is referencing the RC1 build of Orchard Core ([`1.0.0-rc1-10004`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.0.0-rc1-10004)).
+This module is referencing the RC1 build of Orchard Core ([`1.0.0-rc2-13450`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.0.0-rc2-13450)).
 
 ## Installing
 
@@ -18,9 +18,7 @@ Alternatively you can [download the source](https://github.com/etchuk/Etch.Orcha
 
 ## Fixes
 
-Below is a list of fixes that have been applied. These should be checked each time there is a new version of Orchard Core as they will likely be resolved and can be reverted.
-
-- Fix flow editor not collapsing/expanding when editing `BagPart` (https://github.com/OrchardCMS/OrchardCore/pull/4389)
+Currently theme contains no fixes.
 
 ## Enhancements
 
@@ -45,10 +43,12 @@ To make this work effectively the content definitions for widgets on the sites m
                     "Name": "Paragraph",
                     "DisplayName": "Paragraph",
                     "Settings": {
+                        "ContentTypeSettings": {
+                            "Stereotype": "Widget"
+                        },
                         "Category": "Content",
                         "Description": "Display a paragraph of text.",
                         "Icon": "paragraph",
-                        "Stereotype": "Widget"
                     },
                     "ContentTypePartDefinitionRecords": [
                         {
@@ -63,6 +63,8 @@ To make this work effectively the content definitions for widgets on the sites m
     ]
 }
 ```
+
+One side affect of this change is that the insert widget feature to be able to add a new widget between existing widgets has been disabled.
 
 ## Development
 

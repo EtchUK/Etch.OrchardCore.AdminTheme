@@ -14,7 +14,7 @@
     var parentContentType = Model.FlowPart.ContentItem.ContentType;
     string partName = ((dynamic)Model).Metadata.Name;
 
-    var categories = widgetContentTypes.Select(x => x.Settings["Category"]?.ToString()).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().OrderBy(x => x);
+    var categories = widgetContentTypes.SelectMany(x => (x.Settings.ContainsKey("Category") ? x.Settings["Category"].ToString() : string.Empty).Split(',')).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().OrderBy(x => x);
 }
 
 <script asp-name="jQuery-ui" at="Foot"></script>
@@ -106,20 +106,20 @@
                             </div>
                             <ul class="nav nav-pills flex-column widget-picker-categories">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#all" data-toggle="pill">All</a>
+                                    <a class="nav-link @(categories.Any(x => x == "Common") ? "" : "active")" href="#all" data-toggle="pill">All</a>
                                 </li>
 
                                 @foreach (var category in categories)
                                 {
                                 <li class="nav-item" data-category="@category.HtmlClassify()">
-                                    <a class="nav-link" href="#@category.HtmlClassify()" data-toggle="pill">@category</a>
+                                    <a class="nav-link @(category == "Common" ? "active" : "")" href="#@category.HtmlClassify()" data-toggle="pill">@category</a>
                                 </li>
                                 }
                             </ul>
                         </div>
                         <div class="col-sm-9 col-md-9 col-lg-10">
                             <div class="card-columns tab-content">
-                                @foreach (var type in widgetContentTypes)
+                                @foreach (var type in widgetContentTypes.OrderBy(x => x.DisplayName))
                                 {
 
                                 <div class="card widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">

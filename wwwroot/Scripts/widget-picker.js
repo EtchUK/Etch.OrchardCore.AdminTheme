@@ -11,13 +11,13 @@
         var $categoryPickers = $picker.querySelectorAll('.widget-picker-categories .nav-item');
 
         var applyFilter = function (category, term) {
-            var $widgets = document.querySelectorAll('.js-flow-widget')
+            var $widgets = document.querySelectorAll('.js-flow-widget');
 
             category = category || document.querySelectorAll('.widget-picker-categories .nav-link.active')[0].getAttribute('href').substr(1);
             term = term || document.querySelector('.modal-widgets input[type=search]').value;
 
             $widgets.forEach(function ($widget) {
-                if (category !== 'all' && $widget.getAttribute('data-category') !== category) {
+                if (category !== 'all' && $widget.getAttribute('data-category').split("-").indexOf(category) === -1) {
                     $widget.classList.add('d-none');
                     return;
                 }
@@ -50,5 +50,7 @@
             $widgetSearch.addEventListener('keyup', onSearch);
             $widgetSearch.addEventListener('search', onSearch);
         }
+
+        applyFilter('common', '');
     };
 })();

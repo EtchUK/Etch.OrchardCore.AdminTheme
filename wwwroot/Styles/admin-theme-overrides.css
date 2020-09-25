@@ -1,0 +1,196 @@
+[dir] .ta-navbar-top {
+  border: 0;
+  background: #070f26; /* Durban Blue */
+}
+
+.navbar-light .navbar-nav .nav-link,
+.ta-navbar-top .navbar-nav .nav-link,
+.admin-toolbar .navbar-nav .nav-link {
+  color: #9397a4;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.ta-navbar-top .navbar-nav .nav-link:hover,
+.admin-toolbar .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus,
+.ta-navbar-top .navbar-nav .nav-link:focus,
+.admin-toolbar .navbar-nav .nav-link:focus {
+  color: white;
+}
+
+.ta-navbar-brand span:last-child,
+.btn-link {
+  color: #60e497;
+}
+
+.btn-link:hover {
+  color: white;
+}
+
+[dir] .left-sidebar-compact #ta-left-sidebar,
+[dir] body:not(.left-sidebar-compact) #ta-left-sidebar {
+  border-right-color: #0c1326;
+  background: #0c1326;
+}
+
+[dir] .left-sidebar-compact #ta-left-sidebar #left-nav > ul > li,
+[dir] body:not(.left-sidebar-compact) #ta-left-sidebar #left-nav > ul > li,
+[dir] body:not(.left-sidebar-compact) #ta-left-sidebar .footer,
+[dir] .left-sidebar-compact #ta-left-sidebar .footer,
+[dir]
+  .left-sidebar-compact
+  #ta-left-sidebar
+  #left-nav
+  > ul
+  > li
+  > .item-label
+  > span.icon,
+[dir] .left-sidebar-compact #ta-left-sidebar #left-nav > ul > li > .item-label,
+[dir] .left-sidebar-compact #ta-left-sidebar #left-nav ul,
+[dir]
+  .left-sidebar-compact
+  #ta-left-sidebar
+  #left-nav
+  > ul
+  > li
+  > .item-label
+  .title:hover {
+  background: #0c1326 !important;
+}
+
+[dir] .left-sidebar-compact #ta-left-sidebar .footer,
+[dir] body:not(.left-sidebar-compact) #ta-left-sidebar .footer {
+  border-top: 1px solid #1c2643;
+}
+
+body:not(.left-sidebar-compact) #ta-left-sidebar #left-nav ul li .item-label,
+[dir]
+  .left-sidebar-compact
+  #ta-left-sidebar
+  #left-nav
+  > ul
+  > li
+  > .item-label
+  .title,
+.left-sidebar-compact #ta-left-sidebar li ul > li > .item-label,
+.left-sidebar-compact #ta-left-sidebar li > ul > li.active > .item-label {
+  color: #9397a4 !important;
+}
+
+.left-sidebar-compact
+  #ta-left-sidebar
+  #left-nav
+  > ul
+  > li
+  > .item-label
+  > span.icon {
+  color: #9397a4;
+}
+.left-sidebar-compact
+  #ta-left-sidebar
+  #left-nav
+  > ul
+  > li
+  > .item-label:hover
+  > span.icon,
+[dir]
+  .left-sidebar-compact
+  #ta-left-sidebar
+  #left-nav
+  > ul
+  > li
+  > .item-label
+  .title:hover,
+.left-sidebar-compact #ta-left-sidebar li ul > li > .item-label:hover {
+  color: white !important;
+}
+
+body:not(.left-sidebar-compact)
+  #ta-left-sidebar
+  #left-nav
+  ul
+  li
+  .item-label:hover,
+body:not(.left-sidebar-compact) #ta-left-sidebar #left-nav li a:hover,
+body:not(.left-sidebar-compact) #ta-left-sidebar #left-nav li a:active {
+  color: white !important;
+}
+
+[dir="ltr"]
+  body:not(.left-sidebar-compact)
+  #ta-left-sidebar
+  li.active
+  > ul
+  > li.active
+  > .item-label::before,
+[dir="ltr"]
+  .left-sidebar-compact
+  #ta-left-sidebar
+  #left-nav
+  > ul
+  > li.has-items.active
+  > .item-label::before,
+[dir="ltr"]
+  .left-sidebar-compact
+  #ta-left-sidebar
+  li.active
+  > ul
+  > li.active
+  > .item-label::before {
+  border-left-color: #60e497;
+}
+
+body:not(.left-sidebar-compact)
+  #ta-left-sidebar
+  #left-nav
+  ul
+  li
+  .collapse
+  .item-label,
+body:not(.left-sidebar-compact)
+  #ta-left-sidebar
+  #left-nav
+  ul
+  li
+  .collapsing
+  .item-label,
+[dir] .left-sidebar-compact #ta-left-sidebar #left-nav ul {
+  background: #060913 !important;
+}
+
+body:not(.left-sidebar-compact)
+  #ta-left-sidebar
+  #left-nav
+  ul
+  li.active
+  > .item-label,
+.left-sidebar-compact #ta-left-sidebar li > ul > li.active > .item-label {
+  background: #232a42 !important;
+  color: white !important;
+  border-bottom: 1px solid #060913;
+}
+
+.leftbar-compactor,
+.leftbar-compactor:hover {
+  color: #60e497;
+}
+
+[dir] .btn-success {
+  background: #247ba0;
+  border-color: #247ba0;
+
+  font-weight: bold;
+}
+[dir] .btn-primary,
+[dir] .button {
+  background: #6ee6a8;
+  border-color: #6ee6a8;
+  color: #070f26;
+  font-weight: bold;
+}
+[dir] .btn-info {
+  background: #f4775b;
+  border-color: #f4775b;
+  color: #070f26;
+  font-weight: bold;
+}

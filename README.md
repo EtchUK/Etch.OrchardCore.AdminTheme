@@ -1,6 +1,6 @@
-# Admin Theme
+# Play CMS Admin Theme
 
-Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore) that uses [TheAdmin](https://github.com/OrchardCMS/OrchardCore/tree/dev/src/OrchardCore.Themes/TheAdmin) as a base theme. Primary purpose is to apply customisations and bug fixes for the admin area between major updates of Orchard Core.
+Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore) that uses [TheAdmin](https://github.com/OrchardCMS/OrchardCore/tree/dev/src/OrchardCore.Themes/TheAdmin) as a base theme and applies Play CMS customisations, plus some bug fixes between major updates of Orchard Core.
 
 ## Build Status
 

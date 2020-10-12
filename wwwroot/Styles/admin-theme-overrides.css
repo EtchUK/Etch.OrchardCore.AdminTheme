@@ -1,3 +1,10 @@
+html[dir],
+[dir] body {
+  background: #f0f2f5;
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+}
+
+/* Navbar (at top of page) */
 [dir] .ta-navbar-top {
   border: 0;
   background: #070f26; /* Durban Blue */
@@ -27,6 +34,7 @@
   color: white;
 }
 
+/* Left sidebar (including compact style) */
 [dir] .left-sidebar-compact #ta-left-sidebar,
 [dir] body:not(.left-sidebar-compact) #ta-left-sidebar {
   border-right-color: #0c1326;
@@ -46,7 +54,6 @@
   > .item-label
   > span.icon,
 [dir] .left-sidebar-compact #ta-left-sidebar #left-nav > ul > li > .item-label,
-[dir] .left-sidebar-compact #ta-left-sidebar #left-nav ul,
 [dir]
   .left-sidebar-compact
   #ta-left-sidebar
@@ -72,8 +79,7 @@ body:not(.left-sidebar-compact) #ta-left-sidebar #left-nav ul li .item-label,
   > li
   > .item-label
   .title,
-.left-sidebar-compact #ta-left-sidebar li ul > li > .item-label,
-.left-sidebar-compact #ta-left-sidebar li > ul > li.active > .item-label {
+.left-sidebar-compact #ta-left-sidebar li ul > li > .item-label {
   color: #9397a4 !important;
 }
 
@@ -86,6 +92,7 @@ body:not(.left-sidebar-compact) #ta-left-sidebar #left-nav ul li .item-label,
   > span.icon {
   color: #9397a4;
 }
+
 .left-sidebar-compact
   #ta-left-sidebar
   #left-nav
@@ -165,9 +172,9 @@ body:not(.left-sidebar-compact)
   li.active
   > .item-label,
 .left-sidebar-compact #ta-left-sidebar li > ul > li.active > .item-label {
+  border-bottom: 1px solid #060913;
   background: #232a42 !important;
   color: white !important;
-  border-bottom: 1px solid #060913;
 }
 
 .leftbar-compactor,
@@ -175,22 +182,65 @@ body:not(.left-sidebar-compact)
   color: #60e497;
 }
 
+/* Buttons */
 [dir] .btn-success {
-  background: #247ba0;
+  border-color: #57aed3;
+
+  background: #57aed3;
+
+  color: #070f26;
+  font-weight: bold;
+}
+
+[dir] .btn-success:hover {
   border-color: #247ba0;
 
-  font-weight: bold;
+  background: #247ba0;
+
+  color: white;
 }
+
 [dir] .btn-primary,
 [dir] .button {
-  background: #6ee6a8;
   border-color: #6ee6a8;
+
+  background: #6ee6a8;
+
   color: #070f26;
   font-weight: bold;
 }
+
+[dir] .btn-primary:hover,
+[dir] .button:hover {
+  border-color: #3bb375;
+  background: #3bb375;
+
+  color: white;
+}
+
 [dir] .btn-info {
-  background: #f4775b;
   border-color: #f4775b;
+
+  background: #f4775b;
+
   color: #070f26;
   font-weight: bold;
+}
+
+[dir] .btn-info:hover {
+  border-color: #db5e42;
+
+  background: #db5e42;
+
+  color: white;
+}
+
+/* Form Inputs */
+[dir] .form-control {
+  border-color: #c6cbda;
+  background: #f9f9fb;
+}
+
+[dir] .form-control:focus {
+  background: #f9f9fb;
 }

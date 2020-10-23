@@ -4,6 +4,11 @@ html[dir],
   font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
 
+/* Logo */
+[dir] .ta-navbar-brand {
+  background-image: url(../play-cms-logo-mark.png);
+}
+
 /* Navbar (at top of page) */
 [dir] .ta-navbar-top {
   border: 0;

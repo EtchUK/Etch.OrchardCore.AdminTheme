@@ -27,11 +27,6 @@ stages:
             inputs:
               path: Etch.OrchardCore.AdminTheme.csproj
 
-          - task: CmdLine@2
-            displayName: 'Compile front-end assets'
-            inputs:
-              script: 'npm run build'
-
           - task: DotNetCoreCLI@2
             displayName: 'dotnet build'
             inputs:

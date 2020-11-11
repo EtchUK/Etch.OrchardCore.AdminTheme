@@ -27,3 +27,12 @@
 .widget-editor-body > div > .edit-container .edit-item-parts div.form-group {
   margin-bottom: 1rem !important;
 }
+
+.widget-editor-body
+  > div
+  > .edit-container
+  .edit-item-parts
+  div.form-group:only-of-type
+  > label {
+  display: block;
+}

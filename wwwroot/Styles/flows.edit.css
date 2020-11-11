@@ -1,29 +1,29 @@
 ﻿@media (min-width: 992px) {
-    .modal-widgets .modal-lg {
-        max-width: 1200px;
-    }
+  .modal-widgets .modal-lg {
+    max-width: 1200px;
+  }
 }
 
 .card.widget p {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .card.widget .card-body,
 .card.widget .card-footer {
-    display: block;
+  display: block;
 }
 
 .card.widget .card-body,
 .card.widget .card-footer {
-    display: block;
+  display: block;
 }
 
-.card.collapsed .card-body, 
+.card.collapsed .card-body,
 .card.collapsed .card-footer {
-    display: none;
+  display: none;
 }
 
-.widget-editor-body > div > .edit-container div.form-group,
-.widget-editor-body>div>.edit-container div.form-group {
-    margin-bottom: 1rem!important;
+.widget-editor-body > div > .edit-container .edit-item-parts div.form-group,
+.widget-editor-body > div > .edit-container .edit-item-parts div.form-group {
+  margin-bottom: 1rem !important;
 }

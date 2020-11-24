@@ -11,10 +11,10 @@
         var $categoryPickers = $picker.querySelectorAll('.widget-picker-categories .nav-item');
 
         var applyFilter = function (category, term) {
-            var $widgets = document.querySelectorAll('.js-flow-widget');
+            var $widgets = $picker.querySelectorAll('.js-flow-widget');
 
-            category = category || document.querySelectorAll('.widget-picker-categories .nav-link.active')[0].getAttribute('href').substr(1);
-            term = term || document.querySelector('.modal-widgets input[type=search]').value;
+            category = category || $picker.querySelectorAll('.widget-picker-categories .nav-link.active')[0].getAttribute('href').substr(1);
+            term = term || $picker.querySelector('.modal-widgets input[type=search]').value;
 
             $widgets.forEach(function ($widget) {
                 if (category !== 'all' && $widget.getAttribute('data-category').split("-").indexOf(category) === -1) {

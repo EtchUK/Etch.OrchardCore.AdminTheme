@@ -1,6 +1,6 @@
-# Play CMS Admin Theme
+# PlayCMS Admin Theme
 
-Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore) that uses [TheAdmin](https://github.com/OrchardCMS/OrchardCore/tree/dev/src/OrchardCore.Themes/TheAdmin) as a base theme and applies Play CMS customisations, plus some bug fixes between major updates of Orchard Core.
+Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore) that uses [TheAdmin](https://github.com/OrchardCMS/OrchardCore/tree/dev/src/OrchardCore.Themes/TheAdmin) as a base theme and applies PlayCMS customisations, plus some bug fixes between major updates of Orchard Core.
 
 ## Build Status
 
@@ -18,7 +18,7 @@ Alternatively you can [download the source](https://github.com/etchuk/Etch.Orcha
 
 ## Fixes
 
-- Remove reduction of spacing on widgets within a flow 
+- Remove reduction of spacing on widgets within a flow
 
 ## Enhancements
 

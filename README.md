@@ -74,6 +74,10 @@ One side affect of this change is that the insert widget feature to be able to a
 
 Add edit option on admin area page displaying list of items comtained by a content item.
 
+### Unsaved Changes Prompt
+
+Users will be prompted when leaving a page that has unsaved changes unless the form is being submitted.
+
 ## Development
 
 ### Prerequisities

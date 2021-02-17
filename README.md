@@ -18,7 +18,7 @@ Alternatively you can [download the source](https://github.com/etchuk/Etch.Orcha
 
 ## Fixes
 
-- Remove reduction of spacing on widgets within a flow 
+- Remove reduction of spacing on widgets within a flow
 
 ## Enhancements
 
@@ -73,6 +73,10 @@ One side affect of this change is that the insert widget feature to be able to a
 ### List Part Edit Option
 
 Add edit option on admin area page displaying list of items comtained by a content item.
+
+### Unsaved Changes Prompt
+
+Users will be prompted when leaving a page that has unsaved changes unless the form is being submitted.
 
 ## Development
 

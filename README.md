@@ -26,9 +26,9 @@ Alternatively you can [download the source](https://github.com/etchuk/Etch.Orcha
 
 Minor tweak to add view option when editing a published content item.
 
-### Flow Editor
+### Bag/Flow Editor
 
-Out the box the flow editor is difficult to use when there are a large number of widgets. To fix this the theme will override the `FlowPart` edit template to use a modal with categories/search (replicating workflows) as pitched in an [issue created in the Orchard Core repository](https://github.com/OrchardCMS/OrchardCore/issues/3558).
+Out the box the flow editor is difficult to use when there are a large number of widgets. To fix this the theme will override the `BagPart`/`FlowPart` edit template to use a modal with categories/search (replicating workflows) as pitched in an [issue created in the Orchard Core repository](https://github.com/OrchardCMS/OrchardCore/issues/3558).
 
 To make this work effectively the content definitions for widgets on the sites must include a `Category`, `Description` & `Icon` (using icon name from [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free)). This can be done by running a recipe to update the content definitions, below is a small example to give an idea.
 

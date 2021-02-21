@@ -56,7 +56,7 @@
         <div class="btn-widget-add-below w-100 border border-info">
             <div class="btn-group">
                 <button id="@widgetTemplatePlaceholderId-add-widget-btn" type="button" title="@T["Add Widget"]" class="btn btn-primary btn-sm js-add-widget" data-toggle="modal" data-target="#widget-picker-@widgetTemplatePlaceholderId" data-picker-title="@T["Available Items"]" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <span class="fa fa-plus" aria-hidden="true"></span>
                 </button>
             </div>
         </div>
@@ -124,7 +124,7 @@
                                 {
                                 <div class="card widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
                                     <div class="card-body">
-                                        <h4 class="card-title"><i class="fa fa-@type.Settings["Icon"]?.ToString()"></i> @type.DisplayName</h4>
+                                        <h4 class="card-title"><span class="fa fa-@type.Settings["Icon"]?.ToString()"></span> @type.DisplayName</h4>
                                         <p>@type.Settings["Description"]</p>
                                     </div>
                                     <div class="card-footer text-muted text-xs-right">

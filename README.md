@@ -78,6 +78,10 @@ Add edit option on admin area page displaying list of items comtained by a conte
 
 Users will be prompted when leaving a page that has unsaved changes unless the form is being submitted.
 
+### Theme card thumbnail alignment
+
+Minor tweak to align thumbnails on theme cards when selecting a theme - particularly noticeable on larger screens.
+
 ## Development
 
 ### Prerequisities

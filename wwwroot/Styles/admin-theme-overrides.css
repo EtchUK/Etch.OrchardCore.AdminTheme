@@ -249,3 +249,7 @@ body:not(.left-sidebar-compact)
 [dir] .form-control:focus {
   background: #f9f9fb;
 }
+
+.theme-card .card-theme-thumbnail {
+  background-position: center center;
+}

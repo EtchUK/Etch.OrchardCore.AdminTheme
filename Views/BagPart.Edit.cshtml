@@ -55,9 +55,24 @@
     <div class="btn-widget-add-below-wrapper w-100">
         <div class="btn-widget-add-below w-100 border border-info">
             <div class="btn-group">
-                <button id="@widgetTemplatePlaceholderId-add-widget-btn" type="button" title="@T["Add Widget"]" class="btn btn-primary btn-sm js-add-widget" data-toggle="modal" data-target="#widget-picker-@widgetTemplatePlaceholderId" data-picker-title="@T["Available Items"]" aria-haspopup="true" aria-expanded="false">
-                    <span class="fa fa-plus" aria-hidden="true"></span>
-                </button>
+                @if (Model.ContainedContentTypeDefinitions.Count() == 1)
+                {
+                    <a class="btn btn-primary btn-sm add-widget"
+                       data-target-id="@widgetTemplatePlaceholderId"
+                       data-prefixes-name="@Html.NameFor(x => x.Prefixes)"
+                       data-contenttypes-name="@Html.NameFor(x => x.ContentTypes)"
+                       data-widget-type="@Model.ContainedContentTypeDefinitions.FirstOrDefault().Name"
+                       data-flowmetadata="false"
+                       href="javascript:;">
+                        <span class="fa fa-plus" aria-hidden="true"></span>
+                    </a>
+                }
+                else
+                {
+                    <button id="@widgetTemplatePlaceholderId-add-widget-btn" type="button" title="@T["Add Widget"]" class="btn btn-primary btn-sm js-add-widget" data-toggle="modal" data-target="#widget-picker-@widgetTemplatePlaceholderId" data-picker-title="@T["Available Items"]" aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-plus" aria-hidden="true"></span>
+                    </button>
+                }
             </div>
         </div>
     </div>

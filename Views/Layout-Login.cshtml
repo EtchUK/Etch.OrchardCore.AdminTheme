@@ -1,11 +1,15 @@
+﻿@inject DarkModeService DarkModeService;
+@{
+    var darkMode = await DarkModeService.IsDarkModeAsync();
+}
 <!DOCTYPE html>
-<html lang="@Orchard.CultureName()" dir="@Orchard.CultureDir()">
+<html lang="@Orchard.CultureName()" dir="@Orchard.CultureDir()" data-theme="@DarkModeService.CurrentTheme">
 <head>
     <title>@RenderTitleSegments(Site.SiteName, "before")</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    
+
     <link rel="apple-touch-icon" sizes="180x180" href="~/Etch.OrchardCore.AdminTheme/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="~/Etch.OrchardCore.AdminTheme/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="~/Etch.OrchardCore.AdminTheme/favicon-16x16.png">
@@ -15,18 +19,14 @@
     <meta name="theme-color" content="#60e497">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="~/TheAdmin/Styles/TheAdmin.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <style asp-name="admin-overrides" asp-src="~/Etch.OrchardCore.AdminTheme/Styles/admin-theme-overrides.css" debug-src="~/Etch.OrchardCore.AdminTheme/Styles/admin-theme-overrides.css"></style>
+    <style asp-name="admin" version="1"></style>
 
     <script asp-name="font-awesome" at="Foot" version="5"></script>
     <script asp-name="font-awesome-v4-shims" at="Foot" version="5"></script>
 
     <resources type="Header" />
 </head>
-<body class="preload">
+<body>
     <div class="ta-content ta-content-login">
         @await RenderSectionAsync("Header", required: false)
         @await RenderSectionAsync("Messages", required: false)

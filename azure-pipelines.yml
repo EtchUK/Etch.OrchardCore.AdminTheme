@@ -4,50 +4,50 @@ resources:
 trigger:
   tags:
     include:
-      - '*'
+      - "*"
   branches:
     include:
-      - master
+      - main
 
 variables:
-  buildConfiguration: 'Release'
+  buildConfiguration: "Release"
 
 stages:
   - stage: build
     displayName: Build
     variables:
-      - group: 'Global'
+      - group: "Global"
     jobs:
       - job: Build
         pool:
-          vmImage: 'windows-latest'
+          vmImage: "windows-latest"
         steps:
           - task: tmarkovski.projectversionasvariable.versionintovariable.projectversionasvariable@1
-            displayName: 'Get Project Version as variables from Etch.OrchardCore.AdminTheme.csproj'
+            displayName: "Get Project Version as variables from Etch.OrchardCore.AdminTheme.csproj"
             inputs:
               path: Etch.OrchardCore.AdminTheme.csproj
 
           - task: DotNetCoreCLI@2
-            displayName: 'dotnet build'
+            displayName: "dotnet build"
             inputs:
-              arguments: '-c $(BuildConfiguration)'
+              arguments: "-c $(BuildConfiguration)"
 
           - task: DotNetCoreCLI@2
-            displayName: 'dotnet build'
+            displayName: "dotnet build"
             inputs:
-              arguments: '-c $(BuildConfiguration)'
+              arguments: "-c $(BuildConfiguration)"
 
           - task: DotNetCoreCLI@2
-            displayName: 'dotnet pack'
+            displayName: "dotnet pack"
             inputs:
               command: pack
               versioningScheme: byEnvVar
-              versionEnvVar: 'VERSION_MAJORMINORPATCH'
+              versionEnvVar: "VERSION_MAJORMINORPATCH"
 
           - task: PublishPipelineArtifact@0
-            displayName: 'Publish Pipeline Artifact'
+            displayName: "Publish Pipeline Artifact"
             inputs:
-              targetPath: '$(Build.ArtifactStagingDirectory)'
+              targetPath: "$(Build.ArtifactStagingDirectory)"
 
   - stage: publish
     displayName: NuGet Publish
@@ -56,16 +56,16 @@ stages:
     jobs:
       - job: Publish
         pool:
-          vmImage: 'windows-latest'
+          vmImage: "windows-latest"
         steps:
           - task: DownloadPipelineArtifact@2
             inputs:
-              source: 'current'
-              path: '$(Pipeline.Workspace)'
+              source: "current"
+              path: "$(Pipeline.Workspace)"
           - task: NuGetCommand@2
-            displayName: 'NuGet push'
+            displayName: "NuGet push"
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/**/drop/*.nupkg'
+              packagesToPush: "$(Pipeline.Workspace)/**/drop/*.nupkg"
               nuGetFeedType: external
-              publishFeedCredentials: 'NuGet'
+              publishFeedCredentials: "NuGet"

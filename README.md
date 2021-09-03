@@ -8,7 +8,7 @@ Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore)
 
 ## Orchard Core Reference
 
-This module is referencing the RC1 build of Orchard Core ([`1.0.0-rc2-13450`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.0.0-rc2-13450)).
+This module is referencing a stable build of Orchard Core ([`1.0.0`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.0.0)).
 
 ## Installing
 
@@ -16,15 +16,7 @@ This module is available on [NuGet](https://www.nuget.org/packages/Etch.OrchardC
 
 Alternatively you can [download the source](https://github.com/etchuk/Etch.OrchardCore.AdminTheme/archive/master.zip) or clone the repository to your local machine. Add the project to your solution that contains an Orchard Core project and add a reference to Etch.OrchardCore.AdminTheme.
 
-## Fixes
-
-- Remove reduction of spacing on widgets within a flow
-
 ## Enhancements
-
-### Content Editor
-
-Minor tweak to add view option when editing a published content item.
 
 ### Bag/Flow Editor
 
@@ -69,10 +61,6 @@ To make this work effectively the content definitions for widgets on the sites m
 ```
 
 One side affect of this change is that the insert widget feature to be able to add a new widget between existing widgets has been disabled.
-
-### List Part Edit Option
-
-Add edit option on admin area page displaying list of items comtained by a content item.
 
 ### Unsaved Changes Prompt
 

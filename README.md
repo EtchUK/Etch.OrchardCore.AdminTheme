@@ -62,6 +62,10 @@ To make this work effectively the content definitions for widgets on the sites m
 
 One side affect of this change is that the insert widget feature to be able to add a new widget between existing widgets has been disabled.
 
+### Improve Flow/Bag Edit Performance
+
+https://github.com/OrchardCMS/OrchardCore/pull/10587
+
 ### Unsaved Changes Prompt
 
 Users will be prompted when leaving a page that has unsaved changes unless the form is being submitted.

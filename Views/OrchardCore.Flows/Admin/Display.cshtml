@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Html
+@model OrchardCore.Flows.ViewModels.BuildEditorViewModel
+@inject OrchardCore.ResourceManagement.IResourceManager ResourceManager
+
+@{
+    // Don't render the theme
+    Layout = "";
+
+    var sw = new System.IO.StringWriter();
+    ((IHtmlContent)await DisplayAsync(Model.EditorShape)).WriteTo(sw, HtmlEncoder);
+    var content = sw.ToString();
+
+    // Gather all registered scripts/stylesheets for this editor
+    var htmlBuilder = new HtmlContentBuilder();
+
+    sw = new System.IO.StringWriter();
+    ResourceManager.RenderStylesheet(sw);
+    htmlBuilder.AppendHtml(sw.ToString());
+
+    sw = new System.IO.StringWriter();
+    htmlBuilder.WriteTo(sw, HtmlEncoder);
+    var stylesheets = sw.ToString();
+
+    htmlBuilder = new HtmlContentBuilder();
+
+    sw = new System.IO.StringWriter();
+    ResourceManager.RenderHeadScript(sw);
+    htmlBuilder.AppendHtml(sw.ToString());
+
+    sw = new System.IO.StringWriter();
+    htmlBuilder.WriteTo(sw, HtmlEncoder);
+    var header = sw.ToString();
+
+    htmlBuilder = new HtmlContentBuilder();
+
+    sw = new System.IO.StringWriter();
+    ResourceManager.RenderFootScript(sw);
+    htmlBuilder.AppendHtml(sw.ToString());
+
+    sw = new System.IO.StringWriter();
+    htmlBuilder.WriteTo(sw, HtmlEncoder);
+    var footer = sw.ToString();
+}
+
+{
+    "Stylesheets": @Json.Serialize(stylesheets),
+    "Header": @Json.Serialize(header),
+    "Content": @Json.Serialize(content),
+    "Footer": @Json.Serialize(footer)
+}

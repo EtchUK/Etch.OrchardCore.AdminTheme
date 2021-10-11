@@ -72,21 +72,13 @@
     {
         Context.Items["FlowPart.Edit"] = new object();
 
-    @foreach (var type in widgetContentTypes)
-        {
-            // Render a mock widget so that its resources are included in the page
-            var contentItem = await ContentManager.NewAsync(type.Name);
-            await DisplayAsync(await ContentItemDisplayManager.BuildEditorAsync(contentItem, Model.Updater, true, "", Guid.NewGuid().ToString("n")));
-        }
-
-    <script asp-src="~/OrchardCore.Flows/Scripts/flows.edit.min.js"
-            debug-src="~/OrchardCore.Flows/Scripts/flows.edit.js" at="Foot" depends-on="admin"></script>
-    <style asp-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.min.css"
-           debug-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.css"></style>
-    <style asp-src="~/OrchardCore.Flows/Styles/flows.edit.css"
-           debug-src="~/OrchardCore.Flows/Styles/flows.edit.min.css"></style>
-    <style asp-src="~/Etch.OrchardCore.AdminTheme/Styles/flows.edit.css" asp-append-version="true"></style>
-    <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/widget-picker.js" at="Foot" depends-on="admin" asp-append-version="true"></script>
+        <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/flows.edit.js" at="Foot" depends-on="admin" asp-append-version="true"></script>
+        <style asp-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.min.css"
+               debug-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.css"></style>
+        <style asp-src="~/OrchardCore.Flows/Styles/flows.edit.css"
+               debug-src="~/OrchardCore.Flows/Styles/flows.edit.min.css"></style>
+        <style asp-src="~/Etch.OrchardCore.AdminTheme/Styles/flows.edit.css" asp-append-version="true"></style>
+        <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/widget-picker.js" at="Foot" depends-on="admin" asp-append-version="true"></script>
     }
 
     <!-- Widget Picker Modal -->

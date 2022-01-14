@@ -8,7 +8,7 @@ Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore)
 
 ## Orchard Core Reference
 
-This module is referencing a stable build of Orchard Core ([`1.1.0`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.1.0)).
+This module is referencing a stable build of Orchard Core ([`1.3.0`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.3.0)).
 
 ## Installing
 

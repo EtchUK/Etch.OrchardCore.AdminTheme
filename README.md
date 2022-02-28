@@ -74,6 +74,12 @@ Users will be prompted when leaving a page that has unsaved changes unless the f
 
 Minor tweak to align thumbnails on theme cards when selecting a theme - particularly noticeable on larger screens.
 
+### Placement of named parts
+
+Named parts can be positioned on a different tab, however `ContentPart_Edit` can't therefore the name & description stays on the content tab. To get around this, the `ContentPart_Edit` has been overridden to not displayed the name/description, which is now handled within the specific named part. This has been applied to `BagPart` and `FlowPart` as these are common named parts.
+
+https://github.com/OrchardCMS/OrchardCore/pull/11098
+
 ## Development
 
 ### Prerequisities

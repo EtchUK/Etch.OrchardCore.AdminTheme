@@ -1,3 +1,5 @@
+@using OrchardCore.ContentManagement.Metadata.Models
+@using OrchardCore.ContentManagement.Metadata.Settings
 @using OrchardCore.Flows.Models;
 @using OrchardCore.Flows.ViewModels;
 @using OrchardCore.Mvc.Utilities;
@@ -10,13 +12,31 @@
 
 @{
     var widgetTemplatePlaceholderId = Html.Id("widgetTemplatePlaceholder");
+
     var parentContentType = Model.BagPart.ContentItem.ContentType;
     string partName = ((dynamic)Model).Metadata.Name;
+
+    var typeDefinition = ContentDefinitionManager.GetTypeDefinition(parentContentType);
+    var typePartDefinition = typeDefinition.Parts.SingleOrDefault(x => x.Name == partName);
+    var description = typePartDefinition.Description();
+    var namedPart = typePartDefinition.PartDefinition.IsReusable() && typePartDefinition.Name != typePartDefinition.PartDefinition.Name;
 
     var categories = Model.ContainedContentTypeDefinitions.SelectMany(x => (x.Settings.ContainsKey("Category") ? x.Settings["Category"].ToString() : string.Empty).Split(',')).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().OrderBy(x => x);
 }
 
 <script asp-name="jQuery-ui" at="Foot"></script>
+
+@if (namedPart)
+{
+    <h5>
+        @typePartDefinition.DisplayName()
+
+        @if (!String.IsNullOrEmpty(description))
+        {
+            <span class="hint dashed">@description</span>
+        }
+    </h5>
+}
 
 <div class="form-group">
     <div id="@widgetTemplatePlaceholderId" class="widget-template-placeholder widget-template-placeholder-bagpart bagpart-@partName.HtmlClassify() row mx-0" data-buildeditorurl="@Url.Action("BuildEditor", "Admin", new { area = "OrchardCore.Flows" })">
@@ -113,9 +133,9 @@
 
                                 @foreach (var category in categories)
                                 {
-                                <li class="nav-item" data-category="@category.HtmlClassify()">
-                                    <a class="nav-link @(category == "Common" ? "active" : "")" href="#@category.HtmlClassify()" data-toggle="pill">@category</a>
-                                </li>
+                                    <li class="nav-item" data-category="@category.HtmlClassify()">
+                                        <a class="nav-link @(category == "Common" ? "active" : "")" href="#@category.HtmlClassify()" data-toggle="pill">@category</a>
+                                    </li>
                                 }
                             </ul>
                         </div>
@@ -123,22 +143,22 @@
                             <div class="card-columns tab-content">
                                 @foreach (var type in Model.ContainedContentTypeDefinitions.OrderBy(x => x.DisplayName))
                                 {
-                                <div class="card widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
-                                    <div class="card-body">
-                                        <h4 class="card-title"><span class="fa fa-@type.Settings["Icon"]?.ToString()"></span> @type.DisplayName</h4>
-                                        <p>@type.Settings["Description"]</p>
+                                    <div class="card widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
+                                        <div class="card-body">
+                                            <h4 class="card-title"><span class="fa fa-@type.Settings["Icon"]?.ToString()"></span> @type.DisplayName</h4>
+                                            <p>@type.Settings["Description"]</p>
+                                        </div>
+                                        <div class="card-footer text-muted text-xs-right">
+                                            <a class="btn btn-primary btn-sm add-widget"
+                                               data-target-id="@widgetTemplatePlaceholderId"
+                                               data-prefixes-name="@Html.NameFor(x => x.Prefixes)"
+                                               data-contenttypes-name="@Html.NameFor(x => x.ContentTypes)"
+                                               data-widget-type="@type.Name"
+                                               data-flowmetadata="false"
+                                               data-dismiss="modal"
+                                               href="javascript:;">@T["Add"]</a>
+                                        </div>
                                     </div>
-                                    <div class="card-footer text-muted text-xs-right">
-                                        <a class="btn btn-primary btn-sm add-widget"
-                                            data-target-id="@widgetTemplatePlaceholderId"
-                                            data-prefixes-name="@Html.NameFor(x => x.Prefixes)"
-                                            data-contenttypes-name="@Html.NameFor(x => x.ContentTypes)"
-                                            data-widget-type="@type.Name"
-                                            data-flowmetadata="false"
-                                            data-dismiss="modal"
-                                            href="javascript:;">@T["Add"]</a>
-                                    </div>
-                                </div>
                                 }
                             </div>
                         </div>

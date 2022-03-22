@@ -17,9 +17,9 @@
     string partName = ((dynamic)Model).Metadata.Name;
 
     var typeDefinition = ContentDefinitionManager.GetTypeDefinition(parentContentType);
-    var typePartDefinition = typeDefinition.Parts.SingleOrDefault(x => x.Name == partName);
-    var description = typePartDefinition.Description();
-    var namedPart = typePartDefinition.PartDefinition.IsReusable() && typePartDefinition.Name != typePartDefinition.PartDefinition.Name;
+    var typePartDefinition = typeDefinition.Parts.SingleOrDefault(x => string.Equals(x.Name, partName, StringComparison.OrdinalIgnoreCase));
+    var description = typePartDefinition?.Description();
+    var namedPart = typePartDefinition != null && typePartDefinition.PartDefinition.IsReusable() && typePartDefinition.Name != typePartDefinition.PartDefinition.Name;
 
     var categories = Model.ContainedContentTypeDefinitions.SelectMany(x => (x.Settings.ContainsKey("Category") ? x.Settings["Category"].ToString() : string.Empty).Split(',')).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().OrderBy(x => x);
 }

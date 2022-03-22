@@ -40,7 +40,11 @@
 
 <div class="form-group">
     <div id="@widgetTemplatePlaceholderId" class="widget-template-placeholder widget-template-placeholder-bagpart bagpart-@partName.HtmlClassify() row mx-0" data-buildeditorurl="@Url.Action("BuildEditor", "Admin", new { area = "OrchardCore.Flows" })">
-        @{ var htmlFieldPrefix = this.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix; }
+        @{ 
+            var htmlFieldPrefix = this.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
+            var index = 0;
+        }
+
         @foreach (var widget in Model.BagPart.ContentItems)
         {
             //Create a Card Shape
@@ -60,8 +64,8 @@
                 CanDelete: true,
                 //Input hidden
                 //Prefixes
-                PrefixValue: widget.ContentItemId,
                 HtmlFieldPrefix: htmlFieldPrefix,
+                PrefixValue: htmlFieldPrefix + '-' + (index++).ToString(),
                 PrefixesId: Html.IdFor(x => x.Prefixes),
                 PrefixesName: Html.NameFor(x => x.Prefixes),
                 //Content Types
@@ -79,6 +83,7 @@
                 {
                     <a class="btn btn-primary btn-sm add-widget"
                        data-target-id="@widgetTemplatePlaceholderId"
+                       data-html-field-prefix="@htmlFieldPrefix"
                        data-prefixes-name="@Html.NameFor(x => x.Prefixes)"
                        data-contenttypes-name="@Html.NameFor(x => x.ContentTypes)"
                        data-widget-type="@Model.ContainedContentTypeDefinitions.FirstOrDefault().Name"
@@ -151,6 +156,7 @@
                                         <div class="card-footer text-muted text-xs-right">
                                             <a class="btn btn-primary btn-sm add-widget"
                                                data-target-id="@widgetTemplatePlaceholderId"
+                                               data-html-field-prefix="@htmlFieldPrefix"
                                                data-prefixes-name="@Html.NameFor(x => x.Prefixes)"
                                                data-contenttypes-name="@Html.NameFor(x => x.ContentTypes)"
                                                data-widget-type="@type.Name"

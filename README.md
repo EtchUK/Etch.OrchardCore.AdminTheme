@@ -4,17 +4,17 @@ Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore)
 
 ## Build Status
 
-[![Build Status](https://secure.travis-ci.org/etchuk/Etch.OrchardCore.AdminTheme.png?branch=master)](http://travis-ci.org/etchuk/Etch.OrchardCore.AdminTheme) [![NuGet](https://img.shields.io/nuget/v/Etch.OrchardCore.AdminTheme.svg)](https://www.nuget.org/packages/Etch.OrchardCore.AdminTheme)
+[![Build Status](https://secure.travis-ci.org/etchuk/Etch.OrchardCore.AdminTheme.png?branch=main)](http://travis-ci.org/etchuk/Etch.OrchardCore.AdminTheme) [![NuGet](https://img.shields.io/nuget/v/Etch.OrchardCore.AdminTheme.svg)](https://www.nuget.org/packages/Etch.OrchardCore.AdminTheme)
 
 ## Orchard Core Reference
 
-This module is referencing a stable build of Orchard Core ([`1.3.0`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.3.0)).
+This module is referencing a stable build of Orchard Core ([`1.4.0`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.4.0)).
 
 ## Installing
 
 This module is available on [NuGet](https://www.nuget.org/packages/Etch.OrchardCore.AdminTheme). Add a reference to your Orchard Core web project via the NuGet package manager. Search for "Etch.OrchardCore.AdminTheme", ensuring include prereleases is checked.
 
-Alternatively you can [download the source](https://github.com/etchuk/Etch.OrchardCore.AdminTheme/archive/master.zip) or clone the repository to your local machine. Add the project to your solution that contains an Orchard Core project and add a reference to Etch.OrchardCore.AdminTheme.
+Alternatively you can [download the source](https://github.com/etchuk/Etch.OrchardCore.AdminTheme/archive/main.zip) or clone the repository to your local machine. Add the project to your solution that contains an Orchard Core project and add a reference to Etch.OrchardCore.AdminTheme.
 
 ## Enhancements
 

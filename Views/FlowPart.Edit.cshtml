@@ -19,10 +19,9 @@
 }
 
 <script asp-name="jQuery-ui" at="Foot"></script>
-
-<div class="form-group">
+<div class="" mb-3">
     <div id="@widgetTemplatePlaceholderId" class="widget-template-placeholder widget-template-placeholder-flowpart flowpart-@partName.HtmlClassify() row mx-0" data-buildeditorurl="@Url.Action("BuildEditor", "Admin", new { area = "OrchardCore.Flows" })">
-        @{ 
+        @{
             var index = 0;
         }
 
@@ -33,34 +32,34 @@
 
             //Create a Card Shape
             dynamic contentCard = await New.ContentCard(
-                //For Updater
-                CollectionShape: Model,
-                //Shape Specific
-                CollectionShapeType: nameof(FlowPart),
-                ContentItem: widget,
-                BuildEditor: true,
-                ParentContentType: parentContentType,
-                ContainedContentTypes: Model.ContainedContentTypeDefinitions,
-                CollectionPartName: partName,
-                //FlowPart Card Specific - For Frame
-                ColumnSize: colSize,
-                //Card Specific Properties
-                TargetId: widgetTemplatePlaceholderId,
-                Inline: false,
-                CanMove: true,
-                CanDelete: true,
-                //Input hidden
-                //Prefixes
-                HtmlFieldPrefix: htmlFieldPrefix,
-                PrefixValue: htmlFieldPrefix + '-' + (index++).ToString(),
-                PrefixesId: Html.IdFor(x => x.Prefixes),
-                PrefixesName: Html.NameFor(x => x.Prefixes),
-                //Content Types
-                ContentTypesId: widget.ContentItemId + "_" + Html.IdFor(x => x.ContentTypes),
-                ContentTypesName: Html.NameFor(x => x.ContentTypes),
-                //Content Items
-                ContentItemsId: Html.IdFor(x => x.ContentItems),
-                ContentItemsName: Html.NameFor(x => x.ContentItems)
+            //For Updater
+            CollectionShape: Model,
+            //Shape Specific
+            CollectionShapeType: nameof(FlowPart),
+            ContentItem: widget,
+            BuildEditor: true,
+            ParentContentType: parentContentType,
+            ContainedContentTypes: Model.ContainedContentTypeDefinitions,
+            CollectionPartName: partName,
+            //FlowPart Card Specific - For Frame
+            ColumnSize: colSize,
+            //Card Specific Properties
+            TargetId: widgetTemplatePlaceholderId,
+            Inline: false,
+            CanMove: true,
+            CanDelete: true,
+            //Input hidden
+            //Prefixes
+            HtmlFieldPrefix: htmlFieldPrefix,
+            PrefixValue: htmlFieldPrefix + '-' + (index++).ToString(),
+            PrefixesId: Html.IdFor(x => x.Prefixes),
+            PrefixesName: Html.NameFor(x => x.Prefixes),
+            //Content Types
+            ContentTypesId: widget.ContentItemId + "_" + Html.IdFor(x => x.ContentTypes),
+            ContentTypesName: Html.NameFor(x => x.ContentTypes),
+            //Content Items
+            ContentItemsId: Html.IdFor(x => x.ContentItems),
+            ContentItemsName: Html.NameFor(x => x.ContentItems)
             );
             @await DisplayAsync(contentCard)
         }
@@ -68,7 +67,7 @@
     <div class="btn-widget-add-below-wrapper w-100">
         <div class="btn-widget-add-below w-100 border border-info">
             <div class="btn-group">
-                <button id="@widgetTemplatePlaceholderId-add-widget-btn" type="button" title="@T["Add Widget"]" class="btn btn-primary btn-sm js-add-widget" data-toggle="modal" data-target="#widget-picker-@widgetTemplatePlaceholderId" data-picker-title="@T["Available Widgets"]" aria-haspopup="true" aria-expanded="false">
+                <button id="@widgetTemplatePlaceholderId-add-widget-btn" type="button" title="@T["Add Widget"]" class="btn btn-primary btn-sm js-add-widget" data-bs-toggle="modal" data-bs-target="#widget-picker-@widgetTemplatePlaceholderId" data-picker-title="@T["Available Widgets"]" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
             </div>
@@ -81,9 +80,9 @@
 
         <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/flows.edit.js" at="Foot" depends-on="admin" asp-append-version="true"></script>
         <style asp-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.min.css"
-               debug-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.css"></style>
+           debug-src="~/OrchardCore.Widgets/Styles/widgetslist.edit.css"></style>
         <style asp-src="~/OrchardCore.Flows/Styles/flows.edit.css"
-               debug-src="~/OrchardCore.Flows/Styles/flows.edit.min.css"></style>
+           debug-src="~/OrchardCore.Flows/Styles/flows.edit.min.css"></style>
         <style asp-src="~/Etch.OrchardCore.AdminTheme/Styles/flows.edit.css" asp-append-version="true"></style>
         <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/widget-picker.js" at="Foot" depends-on="admin" asp-append-version="true"></script>
     }
@@ -94,61 +93,60 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="activity-picker-label">@T["Available Widgets"]</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-lg-2">
-                            <div class="form-group">
-                                <input class="form-control mb-3" type="search" placeholder="@T["Filter"]" aria-label="@T["Filter"]" autofocus>
+                            <div class="mb-3">
+                                <input class="form-control" type="search" placeholder="@T["Filter"]" aria-label="@T["Filter"]" autofocus>
                             </div>
                             <ul class="nav nav-pills flex-column widget-picker-categories">
                                 <li class="nav-item">
-                                    <a class="nav-link @(categories.Any(x => x == "Common") ? "" : "active")" href="#all" data-toggle="pill">All</a>
+                                    <a class="nav-link @(categories.Any(x => x == "Common") ? "" : "active")" href="#all" data-bs-toggle="pill">All</a>
                                 </li>
 
                                 @foreach (var category in categories)
                                 {
-                                <li class="nav-item" data-category="@category.HtmlClassify()">
-                                    <a class="nav-link @(category == "Common" ? "active" : "")" href="#@category.HtmlClassify()" data-toggle="pill">@category</a>
-                                </li>
+                                    <li class="nav-item" data-category="@category.HtmlClassify()">
+                                        <a class="nav-link @(category == "Common" ? "active" : "")" href="#@category.HtmlClassify()" data-bs-toggle="pill">@category</a>
+                                    </li>
                                 }
                             </ul>
                         </div>
                         <div class="col-sm-9 col-md-9 col-lg-10">
-                            <div class="card-columns tab-content">
+                            <div class="tab-content row row-cols-1 row-cols-md-3 g-2">
                                 @foreach (var type in widgetContentTypes.OrderBy(x => x.DisplayName))
                                 {
-
-                                <div class="card widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
-                                    <div class="card-body">
-                                        <h4 class="card-title"><i class="fa fa-@type.Settings["Icon"]?.ToString()"></i> @type.DisplayName</h4>
-                                        <p>@type.Settings["Description"]</p>
+                                    <div class="col activity widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><i class="fa fa-@type.Settings["Icon"]?.ToString()"></i> @type.DisplayName</h4>
+                                                <p>@type.Settings["Description"]</p>
+                                            </div>
+                                            <div class="card-footer text-muted text-xs-right">
+                                                <a class="btn btn-primary btn-sm add-widget"
+                                               data-target-id="@widgetTemplatePlaceholderId"
+                                               data-html-field-prefix="@htmlFieldPrefix"
+                                               data-prefixes-name="@Html.NameFor(x => x.Prefixes)"
+                                               data-contenttypes-name="@Html.NameFor(x => x.ContentTypes)"
+                                               data-contentitems-name="@Html.NameFor(x => x.ContentItems)"
+                                               data-widget-type="@type.Name"
+                                               data-flowmetadata="true"
+                                               data-parent-content-type="@parentContentType"
+                                               data-part-name="@partName"
+                                               data-bs-dismiss="modal"
+                                               href="javascript:;">@T["Add"]</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-footer text-muted text-xs-right">
-                                        <a  class="btn btn-primary btn-sm add-widget"
-                                            data-target-id="@widgetTemplatePlaceholderId"
-                                            data-html-field-prefix="@htmlFieldPrefix"
-                                            data-prefixes-name="@Html.NameFor(x => x.Prefixes)"
-                                            data-contenttypes-name="@Html.NameFor(x => x.ContentTypes)"
-                                            data-contentitems-name="@Html.NameFor(x => x.ContentItems)"
-                                            data-widget-type="@type.Name"
-                                            data-flowmetadata="true"
-                                            data-parent-content-type="@parentContentType"
-                                            data-part-name="@partName"
-                                            data-dismiss="modal"
-                                           href="javascript:;">@T["Add"]</a>
-                                    </div>
-                                </div>
                                 }
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@T["Cancel"]</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@T["Cancel"]</button>
                 </div>
             </div>
         </div>
@@ -158,86 +156,94 @@
         $('#@widgetTemplatePlaceholderId-add-widget-btn').on('click', function () {
             window.displayPicker($('#widget-picker-@widgetTemplatePlaceholderId')[0]);
         });
-    function toggleWidgets(){
-        $('.toggleAll > svg').toggleClass('fa-angle-double-up fa-angle-double-down');
-        $('.widget.widget-editor.card').toggleClass('collapsed');
-    }
-    @*Only apply sortable if element is present in dom, do not call sortable on scripts for mock widgets *@
-    if ($('#@widgetTemplatePlaceholderId').length == 1) {
-        $("#@widgetTemplatePlaceholderId").sortable({
-            handle: ".widget-editor-handle",
-            cursor: "move",
-            tolerance: "pointer",
-            opacity: 0.7,
-            placeholder: {
-                element: function(currentItem) {
-                    return $('<div class="widget-dragdrop-placeholder"><div></div></div>')[0];
+
+        function toggleWidgets() {
+            var icon = $('.dot');
+            if (icon.attr('data-icon') == 'angles-up') {
+                icon.attr('data-icon', 'angles-down')
+            }
+            else {
+                icon.attr('data-icon', 'angles-up')
+            }
+            $('.widget.widget-editor.card').toggleClass('collapsed');
+        }
+
+        @*Only apply sortable if element is present in dom, do not call sortable on scripts for mock widgets *@
+            if ($('#@widgetTemplatePlaceholderId').length == 1) {
+            $("#@widgetTemplatePlaceholderId").sortable({
+                handle: ".widget-editor-handle",
+                cursor: "move",
+                tolerance: "pointer",
+                opacity: 0.7,
+                placeholder: {
+                    element: function (currentItem) {
+                        return $('<div class="widget-dragdrop-placeholder"><div></div></div>')[0];
+                    },
+                    update: function (container, p) {
+                        return;
+                    }
                 },
-                update: function (container, p) {
-                    return;
-                }
-            },
-            toleranceElement: '> div',
-            connectWith: '.widget-template-placeholder.widget-template-placeholder-flowpart',
-            start: function (event, ui) {
-                widgetDragItem = ui.item;
-                lastContainer = ui.item.parent();
-                lastContainer.toggleClass('widget-dropzone-hint');
-                widgetDragItem.find('.card').first().toggleClass('border-primary')
-                widgetItemSourceId = widgetDragItem.parent().attr('id');
-                var classList = widgetDragItem.attr('class').split(' ');
-                $.each(classList, function (id, item) {
-                    if (item.indexOf('col-md-') === 0) ui.placeholder.addClass(item);
-                });
-            },
-            stop: function (event, ui) {
-                lastContainer.toggleClass('widget-dropzone-hint');
-                widgetDragItem.find('.card').first().toggleClass('border-primary');
-                widgetItemDestId = widgetDragItem.parent().attr('id');
-                if (widgetItemDestId !== widgetItemSourceId) {
-                    var inputs = widgetDragItem.children("input[name*='FlowPart']");
-                    var destination = $('#' + widgetItemDestId).closest('.widget-template')
-                    var source = $('#' + widgetItemSourceId).closest('.widget-template');
-                    var sourceGuid = widgetItemSourceId.substring(0, widgetItemSourceId.indexOf('_') + 1);
-                    var sourceNameGuid = source.children("input[name*='Prefixes']").val() + '.';
-                    if (destination.length > 0) {
-                        var destGuid = widgetItemDestId.substring(0, widgetItemDestId.indexOf('_') + 1);
-                        var destNameGuid = destination.children("input[name*='Prefixes']").val() + '.';
-                        if (source.length) {
+                toleranceElement: '> div',
+                connectWith: '.widget-template-placeholder.widget-template-placeholder-flowpart',
+                start: function (event, ui) {
+                    widgetDragItem = ui.item;
+                    lastContainer = ui.item.parent();
+                    lastContainer.toggleClass('widget-dropzone-hint');
+                    widgetDragItem.find('.card').first().toggleClass('border-primary')
+                    widgetItemSourceId = widgetDragItem.parent().attr('id');
+                    var classList = widgetDragItem.attr('class').split(' ');
+                    $.each(classList, function (id, item) {
+                        if (item.indexOf('col-md-') === 0) ui.placeholder.addClass(item);
+                    });
+                },
+                stop: function (event, ui) {
+                    lastContainer.toggleClass('widget-dropzone-hint');
+                    widgetDragItem.find('.card').first().toggleClass('border-primary');
+                    widgetItemDestId = widgetDragItem.parent().attr('id');
+                    if (widgetItemDestId !== widgetItemSourceId) {
+                        var inputs = widgetDragItem.children("input[name*='FlowPart']");
+                        var destination = $('#' + widgetItemDestId);
+                        var source = $('#' + widgetItemSourceId);
+                        var sourceGuid = widgetItemSourceId.substring(0, widgetItemSourceId.lastIndexOf('_') + 1);
+                        sourceNameGuid = sourceGuid.replaceAll('_', '.');
+                        if (destination.length > 0) {
+                            var destGuid = widgetItemDestId.substring(0, widgetItemDestId.lastIndexOf('_') + 1);
+                            destNameGuid = destGuid.replaceAll('_', '.');
+                            if (source.length > 0) {
+                                inputs.each(function (index, item) {
+                                    $(this).attr('id', $(this).attr('id').replace(sourceGuid, destGuid));
+                                    $(this).attr('name', $(this).attr('name').replace(sourceNameGuid, destNameGuid));
+                                });
+                            } else {
+                                inputs.each(function (index, item) {
+                                    $(this).attr('id', destGuid + $(this).attr('id'));
+                                    $(this).attr('name', destNameGuid + $(this).attr('name'));
+                                });
+                            }
+                        }
+                        else if (source.length > 0) {
                             inputs.each(function (index, item) {
-                                $(this).attr('id', $(this).attr('id').replace(sourceGuid, destGuid));
-                                $(this).attr('name', $(this).attr('name').replace(sourceNameGuid, destNameGuid));
-                            });
-                        } else {
-                            inputs.each(function (index, item) {
-                                $(this).attr('id', destGuid + $(this).attr('id'));
-                                $(this).attr('name', destNameGuid  + $(this).attr('name'));
+                                $(this).attr('id', $(this).attr('id').replace(sourceGuid, ''));
+                                $(this).attr('name', $(this).attr('name').replace(sourceNameGuid, ''));
                             });
                         }
                     }
-                    else if (source.length > 0) {
-                        inputs.each(function (index, item) {
-                            $(this).attr('id', $(this).attr('id').replace(sourceGuid, '') );
-                            $(this).attr('name', $(this).attr('name').replace(sourceNameGuid, ''));
-                        });
+                    $(document).trigger('contentpreview:render');
+                    //clear the global variables
+                    widgetDragItem = null;
+                    lastContainer = null;
+                    widgetItemSourceId = null;
+                    widgetItemDestId = null;
+                },
+                over: function (event, ui) {
+                    var $self = $(this);
+                    if (lastContainer[0] != this) {
+                        lastContainer.toggleClass('widget-dropzone-hint');
+                        lastContainer = $self;
+                        $self.toggleClass('widget-dropzone-hint');
                     }
                 }
-                $(document).trigger('contentpreview:render');
-                //clear the global variables
-                widgetDragItem = null;
-                lastContainer = null;
-                widgetItemSourceId = null;
-                widgetItemDestId = null;
-            },
-            over: function (event, ui) {
-                var $self = $(this);
-                if (lastContainer[0] != this) {
-                    lastContainer.toggleClass('widget-dropzone-hint');
-                    lastContainer = $self;
-                    $self.toggleClass('widget-dropzone-hint');
-                }
-            }
-        });
-    }
+            });
+        }
     </script>
 </div>

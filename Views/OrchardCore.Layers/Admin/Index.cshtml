@@ -15,13 +15,10 @@
 <style asp-src="~/Etch.OrchardCore.AdminTheme/Styles/flows.edit.css" asp-append-version="true"></style>
 <script asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/widget-picker.js" at="Foot" depends-on="admin" asp-append-version="true"></script>
 
-<h1>@RenderTitleSegments(T["Edit Widgets and Layers"])</h1>
+<zone Name="Title"><h1>@RenderTitleSegments(T["Edit Widgets and Layers"])</h1></zone>
 
-<form id="undo-form" asp-action="UpdatePosition" method="post">
+<form id="undo-form" asp-action="UpdatePosition" method="post" class="no-multisubmit">
     <div id="layer-undo-message" class="alert alert-success alert-dismissible show d-none" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
         @T["Widget successfully moved. <a href=\"javascript:console.log('submit');$('#undo-form').submit();\"><strong>Undo</strong></a>."]
     </div>
     <input id="layer-undo-message-contentItemId" type="hidden" name="contentItemId" value="" />
@@ -44,22 +41,22 @@
                     var widgetTemplatePlaceholderId = Guid.NewGuid().ToString("n");
                     double maxPosition = 0;
 
-                    <div class="card form-group">
+                    <div class="card mb-3">
                         <div class="card-header text-muted">
                             @zone
                         </div>
                         <div class="layer-zone card-body" data-zone="@zone">
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <ul class="list-group zones">
                                     @if (Model.Widgets.ContainsKey(zone))
                                     {
                                         foreach (var contentItemSummary in Model.Widgets[zone])
                                         {
-                                            contentItemSummary.Meta.Add(Html.Raw("<span class=\"badge badge-info\"><i class=\"fa fa-bookmark-o\" aria-hidden=\"true\"></i> " + contentItemSummary.ContentItem.Content.LayerMetadata.Layer + "</span>"));
+                                            await contentItemSummary.Tags.AddAsync(Html.Raw("<span class=\"badge ta-badge font-weight-normal\"><i class=\"fa fa-bookmark-o text-info\" aria-hidden=\"true\"></i> " + Html.Encode(contentItemSummary.ContentItem.Content.LayerMetadata.Layer) + "</span>"));
 
                                             maxPosition = Math.Max(maxPosition, (double)contentItemSummary.ContentItem.Content.LayerMetadata.Position);
                                             <li class="list-group-item">
-                                                <div class="properties cursor-move">
+                                                <div class="w-100 cursor-move properties">
                                                     @await DisplayAsync(contentItemSummary)
                                                 </div>
                                                 <input type="hidden"
@@ -75,7 +72,7 @@
                             </div>
 
                             <div class="btn-group">
-                                <button id="@widgetTemplatePlaceholderId-add-widget-btn" type="button" title="@T["Add Widget"]" class="btn btn-primary btn-sm js-add-widget" data-toggle="modal" data-target="#widget-picker-@widgetTemplatePlaceholderId" data-picker-title="@T["Available Widgets"]" aria-haspopup="true" aria-expanded="false">
+                                <button id="@widgetTemplatePlaceholderId-add-widget-btn" type="button" title="@T["Add Widget"]" class="btn btn-primary btn-sm js-add-widget" data-bs-toggle="modal" data-bs-target="#widget-picker-@widgetTemplatePlaceholderId" data-picker-title="@T["Available Widgets"]" aria-haspopup="true" aria-expanded="false">
                                     @T["Add Widget"]
                                 </button>
                             </div>
@@ -87,31 +84,29 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="activity-picker-label">@T["Available Widgets"]</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-sm-3 col-md-3 col-lg-2">
-                                            <div class="form-group">
-                                                <input class="form-control mb-3" type="search" placeholder="@T["Filter"]" aria-label="@T["Filter"]" autofocus>
+                                            <div class="mb-3">
+                                                <input class="form-control" type="search" placeholder="@T["Filter"]" aria-label="@T["Filter"]" autofocus>
                                             </div>
                                             <ul class="nav nav-pills flex-column widget-picker-categories">
                                                 <li class="nav-item">
-                                                    <a class="nav-link @(categories.Any(x => x == "Common") ? "" : "active")" href="#all" data-toggle="pill">All</a>
+                                                    <a class="nav-link @(categories.Any(x => x == "Common") ? "" : "active")" href="#all" data-bs-toggle="pill">All</a>
                                                 </li>
 
                                                 @foreach (var category in categories)
                                                 {
                                                     <li class="nav-item" data-category="@category.HtmlClassify()">
-                                                        <a class="nav-link @(category == "Common" ? "active" : "")" href="#@category.HtmlClassify()" data-toggle="pill">@category</a>
+                                                        <a class="nav-link @(category == "Common" ? "active" : "")" href="#@category.HtmlClassify()" data-bs-toggle="pill">@category</a>
                                                     </li>
                                                 }
                                             </ul>
                                         </div>
                                         <div class="col-sm-9 col-md-9 col-lg-10">
-                                            <div class="card-columns tab-content">
+                                            <div class="tab-content row row-cols-1 row-cols-md-3 g-2">
                                                 @foreach (var type in widgetContentTypes.OrderBy(x => x.DisplayName))
                                                 {
                                                     var contentItem = await ContentManager.NewAsync(type.Name);
@@ -120,16 +115,19 @@
                                                     createRoute["returnUrl"] = Context.Request.PathBase + Context.Request.Path;
                                                     createRoute["LayerMetadata.Zone"] = zone;
                                                     createRoute["LayerMetadata.Position"] = maxPosition + 1;
-                                                    <div class="card widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()" style="">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title"><i class="fa fa-@type.Settings["Icon"]?.ToString()"></i> @type.DisplayName</h4>
-                                                            <p>@type.Settings["Description"]</p>
-                                                        </div>
-                                                        <div class="card-footer text-muted text-xs-right">
-                                                            <a class="btn btn-primary btn-sm add-widget"
-                                                               data-widget-type="@type.Name"
-                                                               data-zone="@zone"
-                                                               href="@Url.Action((string)createRoute["Action"], (string)createRoute["controller"], createRoute)">@T["Add"]</a>
+
+                                                    <div class="col activity widget js-flow-widget" data-category="@type.Settings["Category"]?.ToString().HtmlClassify()">
+                                                        <div class="card h-100">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title"><i class="fa fa-@type.Settings["Icon"]?.ToString()"></i> @type.DisplayName</h4>
+                                                                <p>@type.Settings["Description"]</p>
+                                                            </div>
+                                                            <div class="card-footer text-muted text-xs-right">
+                                                                <a class="btn btn-primary btn-sm add-widget"
+                                                                   data-widget-type="@type.Name"
+                                                                   data-zone="@zone"
+                                                                   href="@Url.Action((string)createRoute["Action"], (string)createRoute["controller"], createRoute)">@T["Add"]</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 }
@@ -138,7 +136,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@T["Cancel"]</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@T["Cancel"]</button>
                                 </div>
                             </div>
                         </div>
@@ -155,25 +153,28 @@
             }
         </form>
     </div>
-    <div class="col-md-4 col-md-pull-right">
+    <div class="col-md-4 col-md-pull-end">
         <h3>@T["Layers"]</h3>
         <p>
-            <span class="hint">@T["Select a layer to reveal its associated widgets."]</span>
+            <span class="hint">
+                @T["Select a layer to reveal its associated widgets."]
+                <a class="seedoc" href="@(OrchardCore.Admin.Constants.DocsUrl)reference/modules/Layers/#rules" target="_blank">@T["See documentation"]</a>
+            </span>
         </p>
-        <div class="form-group">
+        <div class="mb-3">
             <ul class="list-group">
                 @foreach (var layer in Model.Layers)
                 {
                     <li class="list-group-item">
                         <div class="properties">
                             <div class="d-flex flex-wrap">
-                                <div class="custom-control custom-checkbox mr-auto flex-grow-1">
-                                    <input type="checkbox" class="custom-control-input layer-check" id="@layer.Name" value="@layer.Name">
-                                    <label class="custom-control-label" for="@layer.Name">@layer.Name</label>
+                                <div class="form-check me-auto flex-grow-1">
+                                    <input type="checkbox" class="form-check-input layer-check" id="@layer.Name" value="@layer.Name">
+                                    <label class="form-check-label" for="@layer.Name">@layer.Name</label>
                                 </div>
                                 <div>
                                     <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", "Admin", new { area = "OrchardCore.Layers", name = layer.Name })">@T["Edit"]</a>
-                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Admin", new { area = "OrchardCore.Layers", name = layer.Name })" itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
+                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Admin", new { area = "OrchardCore.Layers", name = layer.Name })" data-url-af="RemoveUrl UnsafeUrl">@T["Delete"]</a>
                                 </div>
                             </div>
                             <div>

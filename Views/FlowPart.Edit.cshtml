@@ -1,4 +1,6 @@
 @using OrchardCore.ContentManagement;
+@using OrchardCore.ContentManagement.Metadata.Models
+@using OrchardCore.ContentManagement.Metadata.Settings
 @using OrchardCore.Flows.Models;
 @using OrchardCore.Flows.ViewModels;
 @using OrchardCore.Mvc.Utilities;
@@ -6,6 +8,7 @@
 @model FlowPartEditViewModel
 
 @inject IContentManager ContentManager
+@inject OrchardCore.ContentManagement.Metadata.IContentDefinitionManager ContentDefinitionManager
 @inject OrchardCore.ContentManagement.Display.IContentItemDisplayManager ContentItemDisplayManager
 
 @{
@@ -15,11 +18,29 @@
     var parentContentType = Model.FlowPart.ContentItem.ContentType;
     string partName = ((dynamic)Model).Metadata.Name;
 
+    var typeDefinition = ContentDefinitionManager.GetTypeDefinition(parentContentType);
+    var typePartDefinition = typeDefinition.Parts.SingleOrDefault(x => string.Equals(x.Name, partName, StringComparison.OrdinalIgnoreCase));
+    var description = typePartDefinition?.Description();
+    var namedPart = typePartDefinition != null && typePartDefinition.PartDefinition.IsReusable() && typePartDefinition.Name != typePartDefinition.PartDefinition.Name;
+
     var categories = widgetContentTypes.SelectMany(x => (x.Settings.ContainsKey("Category") ? x.Settings["Category"].ToString() : string.Empty).Split(',')).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().OrderBy(x => x);
 }
 
 <script asp-name="jQuery-ui" at="Foot"></script>
-<div class="" mb-3">
+
+@if (namedPart)
+{
+    <h5>
+        @typePartDefinition.DisplayName()
+
+        @if (!String.IsNullOrEmpty(description))
+        {
+            <span class="hint dashed">@description</span>
+        }
+    </h5>
+}
+
+<div class="mb-3">
     <div id="@widgetTemplatePlaceholderId" class="widget-template-placeholder widget-template-placeholder-flowpart flowpart-@partName.HtmlClassify() row mx-0" data-buildeditorurl="@Url.Action("BuildEditor", "Admin", new { area = "OrchardCore.Flows" })">
         @{
             var index = 0;

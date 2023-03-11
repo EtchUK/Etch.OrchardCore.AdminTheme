@@ -11,6 +11,7 @@ trigger:
 
 variables:
   buildConfiguration: "Release"
+  VersionNumber: "1.0.0"
 
 stages:
   - stage: build
@@ -22,15 +23,21 @@ stages:
         pool:
           vmImage: "windows-latest"
         steps:
-          - task: tmarkovski.projectversionasvariable.versionintovariable.projectversionasvariable@1
-            displayName: "Get Project Version as variables from Etch.OrchardCore.AdminTheme.csproj"
-            inputs:
-              path: Etch.OrchardCore.AdminTheme.csproj
+          - script: |
+              echo ##vso[task.setvariable variable=VersionNumber;]$(Build.SourceBranchName)
+            condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
 
-          - task: DotNetCoreCLI@2
-            displayName: "dotnet build"
+          - task: replacetokens@5
             inputs:
-              arguments: "-c $(BuildConfiguration)"
+              rootDirectory: "$(System.DefaultWorkingDirectory)"
+              targetFiles: |
+                "**/*Manifest.cs"
+                "**/*Etch.OrchardCore.AdminTheme.csproj"
+              actionOnMissing: "fail"
+              tokenPrefix: "$("
+              tokenSuffix: ")"
+              writeBOM: false
+              encoding: "utf-8"
 
           - task: DotNetCoreCLI@2
             displayName: "dotnet build"
@@ -41,8 +48,6 @@ stages:
             displayName: "dotnet pack"
             inputs:
               command: pack
-              versioningScheme: byEnvVar
-              versionEnvVar: "VERSION_MAJORMINORPATCH"
 
           - task: PublishPipelineArtifact@0
             displayName: "Publish Pipeline Artifact"

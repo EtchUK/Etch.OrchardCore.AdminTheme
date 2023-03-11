@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <Version>1.4.2</Version>
+    <Version>$(VersionNumber)</Version>
     <PackageId>Etch.OrchardCore.AdminTheme</PackageId>
     <Title>Admin Theme</Title>
     <Authors>Etch UK</Authors>

@@ -4,11 +4,11 @@ Custom admin theme for [Orchard Core](https://github.com/orchardcms/OrchardCore)
 
 ## Build Status
 
-[![Build Status](https://secure.travis-ci.org/etchuk/Etch.OrchardCore.AdminTheme.png?branch=main)](http://travis-ci.org/etchuk/Etch.OrchardCore.AdminTheme) [![NuGet](https://img.shields.io/nuget/v/Etch.OrchardCore.AdminTheme.svg)](https://www.nuget.org/packages/Etch.OrchardCore.AdminTheme)
+[![NuGet](https://img.shields.io/nuget/v/Etch.OrchardCore.AdminTheme.svg)](https://www.nuget.org/packages/Etch.OrchardCore.AdminTheme)
 
 ## Orchard Core Reference
 
-This module is referencing a stable build of Orchard Core ([`1.4.0`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.4.0)).
+This module is referencing a stable build of Orchard Core ([`1.5.0`](https://www.nuget.org/packages/OrchardCore.Theme.Targets/1.5.0)).
 
 ## Installing
 
@@ -60,7 +60,7 @@ To make this work effectively the content definitions for widgets on the sites m
 }
 ```
 
-One side affect of this change is that the insert widget feature to be able to add a new widget between existing widgets has been disabled.
+Flow/Bag part editor will load with items in a collapsed state.
 
 ### Improve Flow/Bag Edit Performance
 

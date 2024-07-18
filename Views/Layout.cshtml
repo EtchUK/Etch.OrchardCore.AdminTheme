@@ -2,19 +2,19 @@
 @using OrchardCore.DisplayManagement.ModelBinding
 @using OrchardCore.Users.Models
 
-@inject DarkModeService DarkModeService
+@inject ThemeTogglerService ThemeTogglerService
 @inject IDisplayManager<UserMenu> DisplayManager
 @inject IUpdateModelAccessor UpdateModelAccessor
 
 @{
     var adminSettings = Site.As<AdminSettings>();
-    var darkMode = await DarkModeService.IsDarkModeAsync();
+    var darkMode = adminSettings.DisplayThemeToggler;
 
     // Branding is pre-rendered to allow resource injection
     var brandingHtml = await DisplayAsync(await New.AdminBranding());
 }
 <!DOCTYPE html>
-<html lang="@Orchard.CultureName()" dir="@Orchard.CultureDir()" data-tenant="@DarkModeService.CurrentTenant" data-theme="@DarkModeService.CurrentTheme" data-darkmode="@adminSettings.DisplayDarkMode">
+<html lang="@Orchard.CultureName()" dir="@Orchard.CultureDir()" data-tenant="@ThemeTogglerService.CurrentTenant" data-theme="@ThemeTogglerService.CurrentTheme()" data-darkmode="@darkMode">
 <head>
     <title>@RenderTitleSegments(Site.SiteName, "before")</title>
     <meta charset="utf-8">
@@ -66,7 +66,7 @@
                 <div class="d-flex align-items-end pe-md-3">
                     <ul class="nav navbar user-top-navbar">
                         @await RenderSectionAsync("NavbarTop", required: false)
-                        @if (adminSettings.DisplayDarkMode)
+                        @if (adminSettings.DisplayThemeToggler)
                         {
                             <li class="nav-item">
                                 <a id="btn-darkmode" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@(darkMode ? T["Light mode"] : T["Dark mode"])" role="button">

@@ -8,7 +8,8 @@
 @inject OrchardCore.ContentManagement.Display.IContentItemDisplayManager ContentItemDisplayManager
 
 @{
-    var widgetContentTypes = ContentDefinitionManager.ListTypeDefinitions().Where(t => t.GetSettings<ContentTypeSettings>().Stereotype == "Widget");
+    var typeDefinitions = await ContentDefinitionManager.ListTypeDefinitionsAsync();
+    var widgetContentTypes = typeDefinitions.Where(t => t.GetSettings<ContentTypeSettings>().Stereotype == "Widget");
     var categories = widgetContentTypes.SelectMany(x => (x.Settings.ContainsKey("Category") ? x.Settings["Category"].ToString() : string.Empty).Split(',')).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().OrderBy(x => x);
 }
 <script asp-name="jquery-ui" at="Foot"></script>

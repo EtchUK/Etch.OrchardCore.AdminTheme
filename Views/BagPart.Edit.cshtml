@@ -16,7 +16,7 @@
     var parentContentType = Model.BagPart.ContentItem.ContentType;
     string partName = ((dynamic)Model).Metadata.Name;
 
-    var typeDefinition = ContentDefinitionManager.GetTypeDefinition(parentContentType);
+    var typeDefinition = await ContentDefinitionManager.GetTypeDefinitionAsync(parentContentType);
     var typePartDefinition = typeDefinition.Parts.SingleOrDefault(x => string.Equals(x.Name, partName, StringComparison.OrdinalIgnoreCase));
     var description = typePartDefinition?.Description();
     var namedPart = typePartDefinition != null && typePartDefinition.PartDefinition.IsReusable() && typePartDefinition.Name != typePartDefinition.PartDefinition.Name;

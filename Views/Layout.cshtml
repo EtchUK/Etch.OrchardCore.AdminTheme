@@ -3,18 +3,19 @@
 @using OrchardCore.Users.Models
 
 @inject ThemeTogglerService ThemeTogglerService
-@inject IDisplayManager<UserMenu> DisplayManager
+@inject IDisplayManager<Navbar> DisplayManager
 @inject IUpdateModelAccessor UpdateModelAccessor
 
 @{
     var adminSettings = Site.As<AdminSettings>();
-    var darkMode = adminSettings.DisplayThemeToggler;
 
-    // Branding is pre-rendered to allow resource injection
+    // Branding and Navbar are pre-rendered to allow resource injection.
     var brandingHtml = await DisplayAsync(await New.AdminBranding());
+    var navbar = await DisplayAsync(await DisplayManager.BuildDisplayAsync(UpdateModelAccessor.ModelUpdater, "DetailAdmin"));
+
 }
 <!DOCTYPE html>
-<html lang="@Orchard.CultureName()" dir="@Orchard.CultureDir()" data-tenant="@ThemeTogglerService.CurrentTenant" data-theme="@ThemeTogglerService.CurrentTheme()" data-darkmode="@darkMode">
+<html lang="@Orchard.CultureName()" dir="@Orchard.CultureDir()" data-bs-theme="@await ThemeTogglerService.CurrentTheme()" data-tenant="@ThemeTogglerService.CurrentTenant">
 <head>
     <title>@RenderTitleSegments(Site.SiteName, "before")</title>
     <meta charset="utf-8">
@@ -30,16 +31,22 @@
     <meta name="theme-color" content="#60e497">
 
     <!-- Bootstrap CSS -->
-    <style media="all" asp-name="admin" version="1"></style>
-    <style asp-name="material-icons" version="1"></style>
+    <script asp-name="admin-main" version="1" at="Head"></script>
 
-    <style asp-name="admin-overrides" asp-src="~/Etch.OrchardCore.AdminTheme/Styles/admin-theme-overrides.css" debug-src="~/Etch.OrchardCore.AdminTheme/Styles/admin-theme-overrides.css"></style>
+    <style asp-name="TheAdminLayout" asp-src="~/TheAdmin/css/admin-layout.min.css" debug-src="~/TheAdmin/css/admin-layout.css" at="Head"></style>
 
-    <script asp-name="font-awesome" at="Head" version="6"></script>
-    <script asp-name="font-awesome-v4-shims" at="Head" version="6"></script>
-    <script asp-name="js-cookie" at="Foot"></script>
+    @if (Orchard.IsRightToLeft())
+    {
+        <style asp-name="bootstrap-rtl" version="5" at="Head"></style>
+        <style media="all" asp-name="admin" version="1" depends-on="bootstrap-rtl,TheAdminLayout" at="Head"></style>
+    }
+    else
+    {
+        <style asp-name="bootstrap" version="5" at="Head"></style>
+        <style media="all" asp-name="admin" version="1" depends-on="bootstrap,TheAdminLayout" at="Head"></style>
+    }
+    <script asp-name="font-awesome" at="Foot" version="6"></script>
     <script asp-name="admin" version="1" at="Foot"></script>
-    <script asp-name="unsavedChanges" asp-src="~/Etch.OrchardCore.AdminTheme/Scripts/unsaved-prompt.js" depends-on="jQuery" at="Foot"></script>
 
     <resources type="Header" />
 
@@ -49,52 +56,25 @@
 </head>
 <body class="preload">
     <div class="ta-wrapper">
-        <div class="ta-navbar-top navbar-expand-lg bg-primary">
-            <div class="d-flex w-100 justify-content-between align-items-center">
-                <div class="brand-wrapper">
-                    <div class="d-flex w-100 justify-content-between align-items-center">
-                        @brandingHtml
+        <nav class="ta-navbar-top navbar text-bg-theme fixed-top">
+            <div class="container-fluid">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <div class="brand-wrapper">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            @brandingHtml
 
-                        @if (adminSettings.DisplayTitlesInTopbar)
-                        {
-                            <div class="brand-wrapper-title">
-                                @await RenderSectionAsync("Title", required: false)
-                            </div>
-                        }
+                            @if (adminSettings.DisplayTitlesInTopbar)
+                            {
+                                <div class="brand-wrapper-title">
+                                    @await RenderSectionAsync("Title", required: false)
+                                </div>
+                            }
+                        </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-end pe-md-3">
-                    <ul class="nav navbar user-top-navbar">
-                        @await RenderSectionAsync("NavbarTop", required: false)
-                        @if (adminSettings.DisplayThemeToggler)
-                        {
-                            <li class="nav-item">
-                                <a id="btn-darkmode" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@(darkMode ? T["Light mode"] : T["Dark mode"])" role="button">
-                                    @if (darkMode)
-                                    {
-                                        <i class="fa-solid fa-sun" aria-hidden="true"></i>
-                                        <span class="d-none">@T["Light mode"]</span>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa-solid fa-moon" aria-hidden="true"></i>
-                                        <span class="d-none">@T["Dark mode"]</span>
-                                    }
-                                </a>
-                            </li>
-                        }
-                        <li class="nav-item">
-                            <a href="@Url.Content("~/")" class="nav-link" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@T["Visit Site"]" role="button">
-                                <i class="fa-solid fa-fw fa-external-link" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            @await DisplayAsync(await DisplayManager.BuildDisplayAsync(new UserMenu(), UpdateModelAccessor.ModelUpdater, "DetailAdmin"))
-                        </li>
-                    </ul>
+                    @navbar
                 </div>
             </div>
-        </div>
+        </nav>
 
         <div id="ta-left-sidebar" class="d-flex flex-column justify-content-between align-items-stretch">
             @await RenderSectionAsync("Navigation", required: false)
